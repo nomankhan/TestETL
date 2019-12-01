@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration scan="true" scanPeriod="30 seconds">
+
+	<appender name="ConsoleLog" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%date %.-3level [%-24.24thread] %-35.35logger{35} - %message%n</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>DEBUG</level>
+		</filter>
+	</appender>
+	
+	<appender name="DebugLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${log.dir}/debug/${app.name}.debug</File>
+		<encoder>
+			<pattern>%date %.-3level [%-24.24thread] %-35.35logger{35} - %message%n</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>DEBUG</level>
+		</filter>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<maxIndex>5</maxIndex>
+			<fileNamePattern>${log.dir}/debug/${app.name}.debug.%i</fileNamePattern>
+		</rollingPolicy>
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>50MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+
+	<appender name="TraceLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${log.dir}/trace/${app.name}.trace</File>
+		<encoder>
+			<pattern>%date %.-3level [%-24.24thread] %-35.35logger{35} - %message%n</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>TRACE</level>
+		</filter>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<maxIndex>5</maxIndex>
+			<fileNamePattern>${log.dir}/trace/${app.name}.trace.%i.gz</fileNamePattern>
+		</rollingPolicy>
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>50MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+
+	<appender name="ErrorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${log.dir}/error/${app.name}.error</File>
+		<encoder>
+			<pattern>%date %.-5level [%-24.24thread] %-30.30logger{30} - %message%n</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>ERROR</level>
+		</filter>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<maxIndex>5</maxIndex>
+			<fileNamePattern>${log.dir}/error/${app.name}.error.%i</fileNamePattern>
+		</rollingPolicy>
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>50MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+	
+ 	<root level="DEBUG">
+		<!-- <appender-ref ref="ErrorLog" />  -->
+		<!-- <appender-ref ref="DebugLog" /> -->
+		<!-- <appender-ref ref="TraceLog" /> -->
+		<appender-ref ref="ConsoleLog" />
+	</root>
+
+	<!-- External Libraries	-->
+	<!-- External Libraries	-->
+	<logger name="sun.rmi"><level value="INFO" /></logger>
+	<logger name="org.hibernate"><level value="INFO" /></logger>
+	<logger name="org.hibernate.SQL"><level value="INFO" /></logger>
+	<logger name="org.springframework"><level value="INFO" /></logger>	
+	<logger name="org.springframework.jdbc"><level value="INFO" /></logger>
+	<logger name="jndi"><level value="INFO" /></logger>
+	<logger name="org.elasticsearch"><level value="INFO" /></logger>	
+	<logger name="org.apache.commons"><level value="INFO" /></logger>
+	<logger name="org.apache.tomcat"><level value="INFO" /></logger>
+	<logger name="org.apache.catalina"><level value="INFO" /></logger>
+	<logger name="org.apache.coyote"><level value="INFO" /></logger>
+	<logger name="org.apache.http"><level value="INFO" /></logger>
+	<logger name="org.eclipse.jetty"><level value="INFO" /></logger>
+	<logger name="javax.management"><level value="INFO" /></logger>
+	<logger name="javax.activation"><level value="INFO" /></logger>
+	<logger name="com.solacesystems"><level value="INFO" /></logger>
+	<logger name="javax.xml.bind"><level value="INFO" /></logger>
+	<logger name="org.thymeleaf"><level value="INFO" /></logger>
+	<logger name="reactor.io"><level value="INFO" /></logger>
+	<logger name="io.netty"><level value="INFO" /></logger>	
+	<logger name="ch.qos"><level value="WARN" /></logger>
+	
+	<!-- Internal Libraries -->
+	<logger name="com.tdbfg.tdsecurities.rnc"><level value="DEBUG" /></logger>
+	<logger name="com.tdbfg.tdsecuritiesrnc"><level value="DEBUG" /></logger>
+
+</configuration>
